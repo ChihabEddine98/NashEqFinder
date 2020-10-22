@@ -8,7 +8,7 @@ from typing import Final
 # 1/Shape of Matrix ( Game strategies )
 #  Basically  : 2x2 Game
 # --------------------------------------
-DIM : Final =(2,2)
+DIM : Final =(3,3)
 # Because we have matrix of couples ( payoff for Player 1 & Player 2 )
 payoff_type=np.dtype(int,int)
 
@@ -68,7 +68,7 @@ class Solver:
 if __name__ == '__main__':
     m=[[(1,3),(2,5)],[(6,1),(2,2)]]
     m2=[[(1,4),(2,2)],[(0,1),(3,6)]]
-    m3=[[(0,1),(4,1)],[(4,1),(2,1)]]
-    M=np.array(m2)
+    m3=[[(0,1),(4,1),(2,3)],[(4,1),(2,1),(5,5)],[(-1,1),(2,8),(3,5)]]
+    M=np.array(m3)
     s=Solver(payoff=M)
     s.solve(1,0)
