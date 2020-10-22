@@ -24,12 +24,21 @@ class Solver:
         possible_nash2=[]
         # Best responses for Player 1 against Player 2 strategies
         for j in range(DIM[1]):
-            best_reply1=max(self.M[:,j],key= lambda x:x[0])
-            best_reply2=max(self.M[j,:],key= lambda y:y[1])
-
-            if(np.array_equal(best_reply1,best_reply2)):
-                possible_nash1.append([tuple(best_reply1),[j]])
+            x_max=max(self.M[:,j],key= lambda x:x[0])[0]
+            best_reply1=[tuple(x) for x in self.M[:,j] if x[0]==x_max]
+            possible_nash1+=best_reply1
         print(possible_nash1)
+
+        # Best responses for Player 2 against Player 1 strategies
+        for i in range(DIM[0]):
+            y_max = max(self.M[i,:], key=lambda x: x[1])[1]
+            best_reply2 = [tuple(y) for y in self.M[i,:] if y[1] == y_max]
+            possible_nash2 += best_reply2
+        print(possible_nash2)
+        # Intersection of two lists give us the Nash equilibria !
+        print(list(set(possible_nash1) & set(possible_nash2)))
+
+
         return possible_nash1
 
     def solve_mixed(self):
@@ -53,8 +62,9 @@ class Solver:
 
 
 if __name__ == '__main__':
-    m=[[(3,3),(0,2)],[(2,0),(1,1)]]
-    M=np.array(m)
-
+    m=[[(1,3),(2,5)],[(6,1),(2,2)]]
+    m2=[[(1,4),(2,2)],[(0,1),(3,6)]]
+    m3=[[(0,1),(4,1)],[(4,1),(2,1)]]
+    M=np.array(m3)
     s=Solver(payoff=M)
     s.solve(1,0)
