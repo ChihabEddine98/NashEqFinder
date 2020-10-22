@@ -39,10 +39,11 @@ class Solver:
             possible_nash2 += best_reply2
         print(possible_nash2)
         # Intersection of two lists give us the Nash equilibria !
-        print(list(set(possible_nash1) & set(possible_nash2)))
+        result=[[x[0],x[1]] for x in list(set(possible_nash1) & set(possible_nash2))]
+        print(result)
 
 
-        return possible_nash1
+        return result
 
     def solve_mixed(self):
         return 2
@@ -68,6 +69,6 @@ if __name__ == '__main__':
     m=[[(1,3),(2,5)],[(6,1),(2,2)]]
     m2=[[(1,4),(2,2)],[(0,1),(3,6)]]
     m3=[[(0,1),(4,1)],[(4,1),(2,1)]]
-    M=np.array(m3)
+    M=np.array(m2)
     s=Solver(payoff=M)
     s.solve(1,0)
