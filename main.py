@@ -93,7 +93,8 @@ class Solver:
 
 
     def solve_all(self):
-        return 3
+        self.solve_pure()
+        self.solve_mixed()
 
     def solve(self,pure=1,mixed=1):
         if(pure and mixed):
@@ -117,4 +118,4 @@ if __name__ == '__main__':
 
     M=np.array(m2)
     s=Solver(payoff=M)
-    s.solve(0,1)
+    s.solve(1,1)
