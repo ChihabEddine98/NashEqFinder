@@ -1,5 +1,6 @@
 import numpy as np
 from typing import Final
+from fractions import Fraction
 
 
 # --------------------------------------
@@ -51,7 +52,7 @@ class Solver:
         We will try to solve to equations of type : ( find p and q )
         a*p=b
         c*q=d
-        ( How we got this a,b,c and d coeiffetiion ? 
+        ( How we got this a,b,c and d coeiffitiions ? ) 
         for example : 
                       q                  1-q
                       C                   D
@@ -88,7 +89,7 @@ class Solver:
         p=b/a if a!=0 else None
         q=d/c if c!=0 else None
 
-        print(p,q)
+        print(f'p = {Fraction(p).limit_denominator()} \nq = {Fraction(q).limit_denominator()}')
 
 
     def solve_all(self):
@@ -114,6 +115,6 @@ if __name__ == '__main__':
     m3=[[(0,1),(4,1),(2,3)],[(4,1),(2,1),(5,5)],[(-1,1),(2,8),(3,5)]]
     m4=[[(3,-3),(-2,2)],[(-1,1),(0,0)]]
 
-    M=np.array(m4)
+    M=np.array(m2)
     s=Solver(payoff=M)
     s.solve(0,1)
