@@ -45,8 +45,39 @@ class Solver:
 
         return result
 
+
+    """
+        We will try to solve to equations of type : ( find p and q )
+        a*p=b
+        c*q=d
+        ( How we got this a,b,c and d coeiffetiion ? 
+        for example : 
+                      q                  1-q
+                      C                   D
+             ---------------------------------------------
+    p      A        (3,-3)       |        (-2,2)     
+             ---------------------------------------------  
+    1-p    B        (-1,1)       |         (0,0)
+             ---------------------------------------------    
+        
+        If we apply the definition of mixed strategy Nash Equ we will get : 
+        For Player 1 :
+        -3p + 1(1-p) = 2p + 0(1-p)
+        For Player 2 : 
+        3q + (-1)(1-q) = -2q + 0(1-q)
+        
+        So our goal is to solve this linear system ! 
+        Lets make it like the format in the start of this example :
+        (-3-1-2+0)p = -1 + 0
+        (3+1+2+0)q  = +1 + 0
+        
+        Cool we have now our a,b,c and d coeiff ! lets do our thing :
+        
+        
+    """
+
     def solve_mixed(self):
-        return 2
+
 
     def solve_all(self):
         return 3
@@ -69,7 +100,7 @@ if __name__ == '__main__':
     m=[[(1,3),(2,5)],[(6,1),(2,2)]]
     m2=[[(1,4),(2,2)],[(0,1),(3,6)]]
     m3=[[(0,1),(4,1),(2,3)],[(4,1),(2,1),(5,5)],[(-1,1),(2,8),(3,5)]]
-    m4=[[(1,-1),(-1,1)],[(-1,1),(1,-1)]]
+    m4=[[(3,-3),(-2,2)],[(-1,1),(0,0)]]
 
     M=np.array(m4)
     s=Solver(payoff=M)
