@@ -19,6 +19,7 @@ class Solver:
     def __init__(self,payoff):
         self.M=payoff
 
+    # This algo give us the result in linear time o(n) !
     def solve_pure(self):
         possible_nash1=[]
         possible_nash2=[]
@@ -64,19 +65,30 @@ class Solver:
         For Player 1 :
         -3p + 1(1-p) = 2p + 0(1-p)
         For Player 2 : 
-        3q + (-1)(1-q) = -2q + 0(1-q)
+        3q + (-2)(1-q) = -1q + 0(1-q)
         
         So our goal is to solve this linear system ! 
         Lets make it like the format in the start of this example :
         (-3-1-2+0)p = -1 + 0
-        (3+1+2+0)q  = +1 + 0
+        (3+2+1+0)q  = +2 + 0
         
         Cool we have now our a,b,c and d coeiff ! lets do our thing :
-        
-        
+        p = 1/6
+        q = 1/3
     """
 
+    # This algo give us the results in constant time ! cool o(1)
     def solve_mixed(self):
+        a = (self.M[0,0][1] - self.M[1,0][1] - self.M[0,1][1] + self.M[1,1][1])
+        b = (-self.M[1,0][1]  + self.M[1,1][1])
+
+        c = (self.M[0, 0][0] - self.M[0, 1][0] - self.M[1, 0][0] + self.M[1, 1][0])
+        d = (-self.M[0, 1][0] + self.M[1, 1][0])
+
+        p=b/a if a!=0 else None
+        q=d/c if c!=0 else None
+
+        print(p,q)
 
 
     def solve_all(self):
@@ -104,4 +116,4 @@ if __name__ == '__main__':
 
     M=np.array(m4)
     s=Solver(payoff=M)
-    s.solve(1,0)
+    s.solve(0,1)
