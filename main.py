@@ -3,12 +3,12 @@ from typing import Final
 from fractions import Fraction
 
 
-# --------------------------------------
+"""--------------------------------------
 # Contants !
 # --------------------------------------
 # 1/Shape of Matrix ( Game strategies )
 #  Basically  : 2x2 Game
-# --------------------------------------
+ --------------------------------------"""
 DIM : Final =(2,2)
 # Because we have matrix of couples ( payoff for Player 1 & Player 2 )
 payoff_type=np.dtype(int,int)
@@ -91,7 +91,7 @@ class Solver:
 
         print(f'p = {Fraction(p).limit_denominator()} \nq = {Fraction(q).limit_denominator()}')
 
-
+    # This algo give us the result in linear time o(n) !
     def solve_all(self):
         self.solve_pure()
         self.solve_mixed()
