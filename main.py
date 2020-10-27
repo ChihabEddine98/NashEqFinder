@@ -1,10 +1,11 @@
 import numpy as np
 from typing import Final
 from fractions import Fraction
+from gui.App import *
 
 
 """--------------------------------------
-# Contants !
+# Constants !
 # --------------------------------------
 # 1/Shape of Matrix ( Game strategies )
 #  Basically  : 2x2 Game
@@ -119,3 +120,9 @@ if __name__ == '__main__':
     M=np.array(m2)
     s=Solver(payoff=M)
     s.solve(1,1)
+
+    # Gui part !
+    app=App()
+    app.mainloop()
+
+
