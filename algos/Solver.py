@@ -95,12 +95,16 @@ class Solver:
         p = b / a if a != 0 else None
         q = d / c if c != 0 else None
 
-        print(f'p = {Fraction(p).limit_denominator()} \nq = {Fraction(q).limit_denominator()}')
+        if(p and q):
+            p=Fraction(p).limit_denominator()
+            q=Fraction(q).limit_denominator()
+
+        print(f'p = {p} \nq = {q}')
+        return (p,q)
 
     # This algo give us the result in linear time o(n) !
     def solve_all(self):
-        self.solve_pure()
-        self.solve_mixed()
+        return (self.solve_pure(),self.solve_mixed())
 
     def solve(self, pure=1, mixed=1):
         if (pure and mixed):

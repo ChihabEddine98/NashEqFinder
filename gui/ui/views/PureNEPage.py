@@ -1,5 +1,6 @@
 import numpy as np
 import tkinter as tk
+from tkinter.messagebox import showerror
 from algos.Solver import *
 
 
@@ -99,36 +100,46 @@ class PureNEPage(tk.Frame):
         v.configure(foreground=fg_color)
 
     def solve(self):
-        # We need to transofrm our GUI entries to variables  !
-        po00=(int(self.payoffEntryL00.get()),int(self.payoffEntryR00.get()))
-        po01=(int(self.payoffEntryL01.get()),int(self.payoffEntryR01.get()))
-        po10=(int(self.payoffEntryL10.get()),int(self.payoffEntryR10.get()))
-        po11=(int(self.payoffEntryL11.get()),int(self.payoffEntryR11.get()))
-        payoff=[[po00,po01],[po10,po11]]
-        M=np.array(payoff)
-        s = Solver(payoff=M)
-        result=s.solve(1, 0)
 
-        po00=(self.payoffFrame00,self.payoffLP00,self.payoffV00,
-              self.payoffRP00,self.payoffEntryL00,self.payoffEntryR00)
-        po01=(self.payoffFrame01,self.payoffLP01,self.payoffV01,
-              self.payoffRP01,self.payoffEntryL01,self.payoffEntryR01)
-        po10=(self.payoffFrame10,self.payoffLP10,self.payoffV10,
-              self.payoffRP10,self.payoffEntryL10,self.payoffEntryR10)
-        po11=(self.payoffFrame11,self.payoffLP11,self.payoffV11,
-              self.payoffRP11,self.payoffEntryL11,self.payoffEntryR11)
+        try:
+            # We need to transofrm our GUI entries to variables  !
+            po00 = (int(self.payoffEntryL00.get()), int(self.payoffEntryR00.get()))
+            po01 = (int(self.payoffEntryL01.get()), int(self.payoffEntryR01.get()))
+            po10 = (int(self.payoffEntryL10.get()), int(self.payoffEntryR10.get()))
+            po11 = (int(self.payoffEntryL11.get()), int(self.payoffEntryR11.get()))
+            payoff = [[po00, po01], [po10, po11]]
 
-        show_ne=[po00,po01,po10,po11]
-        print(result)
-        res2Show=[]
-        for r in result:
-            bin_num=str(r[0])+str(r[1])
-            idx=int(bin_num,2)
-            res2Show.append(idx)
+            M = np.array(payoff)
+            s = Solver(payoff=M)
+            result=s.solve(1, 0)
+            po00 = (self.payoffFrame00, self.payoffLP00, self.payoffV00,
+                    self.payoffRP00, self.payoffEntryL00, self.payoffEntryR00)
+            po01 = (self.payoffFrame01, self.payoffLP01, self.payoffV01,
+                    self.payoffRP01, self.payoffEntryL01, self.payoffEntryR01)
+            po10 = (self.payoffFrame10, self.payoffLP10, self.payoffV10,
+                    self.payoffRP10, self.payoffEntryL10, self.payoffEntryR10)
+            po11 = (self.payoffFrame11, self.payoffLP11, self.payoffV11,
+                    self.payoffRP11, self.payoffEntryL11, self.payoffEntryR11)
 
-        for i in res2Show:
-            self.showNE(show_ne[i][0],show_ne[i][1],show_ne[i][2],
-                        show_ne[i][3],show_ne[i][4],show_ne[i][5])
+            show_ne = [po00, po01, po10, po11]
+            print(result)
+            res2Show = []
+            for r in result:
+                bin_num = str(r[0]) + str(r[1])
+                idx = int(bin_num, 2)
+                res2Show.append(idx)
+
+            for i in res2Show:
+                self.showNE(show_ne[i][0], show_ne[i][1], show_ne[i][2],
+                            show_ne[i][3], show_ne[i][4], show_ne[i][5])
+
+
+        except ValueError as verr:
+            showerror(title=" Invalid PayOff", message=" All entries need to be Integers!")
+            return
+
+
+
 
     def __init__(self, parent,controller):
         tk.Frame.__init__(self, parent)
