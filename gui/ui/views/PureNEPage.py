@@ -1,4 +1,6 @@
+import numpy as np
 import tkinter as tk
+from algos.Solver import *
 
 
 class PureNEPage(tk.Frame):
@@ -9,7 +11,9 @@ class PureNEPage(tk.Frame):
         po10=(int(self.payoffEntryL10.get()),int(self.payoffEntryR10.get()))
         po11=(int(self.payoffEntryL11.get()),int(self.payoffEntryR11.get()))
         payoff=[[po00,po01],[po10,po11]]
-        print(payoff)
+        M=np.array(payoff)
+        s = Solver(payoff=M)
+        s.solve(1, 1)
 
     def __init__(self, parent,controller):
         tk.Frame.__init__(self, parent)
