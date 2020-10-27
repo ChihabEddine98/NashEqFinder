@@ -26,7 +26,12 @@ class Solver:
         for j in range(DIM[1]):
             x_max = max(self.M[:, j], key=lambda x: x[0])
             a = [tuple(x) for x in self.M[:, j]]
-            best_reply1 = [(tuple(x), (a.index(tuple(x)), j)) for x in self.M[:, j] if x[0] == x_max[0]]
+
+            if(a[0]==a[1]):
+                best_reply1 = [(a[0],(0,j)),(a[1],(1,j))]
+            else:
+                best_reply1 = [(tuple(x), (a.index(tuple(x)), j)) for x in self.M[:, j] if x[0] == x_max[0]]
+
             possible_nash1 += best_reply1
         print(possible_nash1)
 
@@ -34,7 +39,12 @@ class Solver:
         for i in range(DIM[0]):
             y_max = max(self.M[i, :], key=lambda y: y[1])
             a = [tuple(x) for x in self.M[i, :]]
-            best_reply2 = [(tuple(y), (i, a.index(tuple(y)))) for y in self.M[i, :] if y[1] == y_max[1]]
+            if(a[0]==a[1]):
+                best_reply2 = [(a[0],(i,0)),(a[1],(i,1))]
+            else:
+                best_reply2 = [(tuple(y), (i, a.index(tuple(y)))) for y in self.M[i, :] if y[1] == y_max[1]]
+
+
             # best_reply2 = [tuple(y) for y in self.M[i,:] if y[1] == y_max]
             possible_nash2 += best_reply2
         print(possible_nash2)
