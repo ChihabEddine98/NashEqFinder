@@ -61,7 +61,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL00 = tk.Entry(self.payoffFrame_1)
         self.payoffEntryL00.place(relx=0.161, rely=0.318, height=32
                 , relwidth=0.203)
-        self.payoffEntryL00.configure(background="white")
+        self.payoffEntryL00.configure(background="#d0d5db")
         self.payoffEntryL00.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL00.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.payoffEntryL00.configure(foreground="#000000")
@@ -74,7 +74,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR00 = tk.Entry(self.payoffFrame_1)
         self.payoffEntryR00.place(relx=0.594, rely=0.318, height=32
                 , relwidth=0.203)
-        self.payoffEntryR00.configure(background="white")
+        self.payoffEntryR00.configure(background="#d0d5db")
         self.payoffEntryR00.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR00.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.payoffEntryR00.configure(foreground="#000000")
@@ -133,7 +133,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL01 = tk.Entry(self.payoffFrame_1_1)
         self.payoffEntryL01.place(relx=0.161, rely=0.318, height=32
                 , relwidth=0.203)
-        self.payoffEntryL01.configure(background="white")
+        self.payoffEntryL01.configure(background="#d0d5db")
         self.payoffEntryL01.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL01.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.payoffEntryL01.configure(foreground="#000000")
@@ -146,7 +146,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR01 = tk.Entry(self.payoffFrame_1_1)
         self.payoffEntryR01.place(relx=0.594, rely=0.318, height=32
                 , relwidth=0.203)
-        self.payoffEntryR01.configure(background="white")
+        self.payoffEntryR01.configure(background="#d0d5db")
         self.payoffEntryR01.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR01.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.payoffEntryR01.configure(foreground="#000000")
@@ -277,7 +277,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL11 = tk.Entry(self.payoffFrame_1_4)
         self.payoffEntryL11.place(relx=0.161, rely=0.31, height=32
                 , relwidth=0.203)
-        self.payoffEntryL11.configure(background="white")
+        self.payoffEntryL11.configure(background="#d0d5db")
         self.payoffEntryL11.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL11.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.payoffEntryL11.configure(foreground="#000000")
@@ -290,7 +290,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR11 = tk.Entry(self.payoffFrame_1_4)
         self.payoffEntryR11.place(relx=0.594, rely=0.31, height=32
                 , relwidth=0.203)
-        self.payoffEntryR11.configure(background="white")
+        self.payoffEntryR11.configure(background="#d0d5db")
         self.payoffEntryR11.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR11.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.payoffEntryR11.configure(foreground="#000000")
@@ -466,12 +466,12 @@ class PureNEPage(tk.Frame):
         self.Label1.configure(text='''Player II''')
 
         self.Button1 = tk.Button(self.mainFrame)
-        self.Button1.place(relx=0.738, rely=0.543, height=63, width=136)
+        self.Button1.place(relx=0.720, rely=0.520, height=63, width=136)
         self.Button1.configure(activebackground="#ececec")
         self.Button1.configure(activeforeground="#000000")
         self.Button1.configure(background="#000")
         self.Button1.configure(disabledforeground="#a3a3a3")
-        self.Button1.configure(font="-family {MV Boli} -size 22")
+        self.Button1.configure(font="-family {MV Boli} -size 24")
         self.Button1.configure(foreground="#61ff33")
         self.Button1.configure(highlightbackground="#d9d9d9")
         self.Button1.configure(highlightcolor="black")
