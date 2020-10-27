@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import font  as tkfont
 from gui.ui.views.PureNEPage import *
+from gui.ui.views.MixedNEPage import *
+from gui.ui.views.AiOPage import *
 from gui.ui.views.WelcomePage import *
 
 
@@ -33,13 +35,13 @@ class App(tk.Tk):
 
 
         self.frames = {}
-        for F in (WelcomePage,PureNEPage):
+        for F in (WelcomePage,PureNEPage,MixedNEPage,AiOPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("PureNEPage")
+        self.show_frame("WelcomePage")
 
 
     def show_frame(self, page_name):
