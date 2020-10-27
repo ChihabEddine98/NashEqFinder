@@ -39,7 +39,7 @@ class Solver:
             possible_nash2 += best_reply2
         print(possible_nash2)
         # Intersection of two lists give us the Nash equilibria !
-        result = [[x[0], x[1]] for x in list(set(possible_nash1) & set(possible_nash2))]
+        result = [ x[1] for x in list(set(possible_nash1) & set(possible_nash2))]
         print(result)
 
         return result

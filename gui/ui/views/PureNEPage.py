@@ -4,6 +4,20 @@ from algos.Solver import *
 
 
 class PureNEPage(tk.Frame):
+    def showNE(self,frame,lp,v,rp,lpo,rpo):
+        bg_color="#28fa63"
+        fg_color="black"
+        frame.configure(background=bg_color)
+        lp.configure(background=bg_color)
+        v.configure(background=bg_color)
+        rp.configure(background=bg_color)
+        lpo.configure(background=bg_color)
+        rpo.configure(background=bg_color)
+
+        lp.configure(foreground=fg_color)
+        rp.configure(foreground=fg_color)
+        v.configure(foreground=fg_color)
+
     def solve(self):
         # We need to transofrm our GUI entries to variables  !
         po00=(int(self.payoffEntryL00.get()),int(self.payoffEntryR00.get()))
@@ -13,8 +27,28 @@ class PureNEPage(tk.Frame):
         payoff=[[po00,po01],[po10,po11]]
         M=np.array(payoff)
         s = Solver(payoff=M)
-        s.solve(1, 0)
-        self.payoffFrame_1.configure(background="white")
+        result=s.solve(1, 0)
+
+        po00=(self.payoffFrame00,self.payoffLP00,self.payoffV00,
+              self.payoffRP00,self.payoffEntryL00,self.payoffEntryR00)
+        po01=(self.payoffFrame01,self.payoffLP01,self.payoffV01,
+              self.payoffRP01,self.payoffEntryL01,self.payoffEntryR01)
+        po10=(self.payoffFrame10,self.payoffLP10,self.payoffV10,
+              self.payoffRP10,self.payoffEntryL10,self.payoffEntryR10)
+        po11=(self.payoffFrame11,self.payoffLP11,self.payoffV11,
+              self.payoffRP11,self.payoffEntryL11,self.payoffEntryR11)
+
+        show_ne=[po00,po01,po10,po11]
+        print(result)
+        res2Show=[]
+        for r in result:
+            bin_num=str(r[0])+str(r[1])
+            idx=int(bin_num,2)
+            res2Show.append(idx)
+
+        for i in res2Show:
+            self.showNE(show_ne[i][0],show_ne[i][1],show_ne[i][2],
+                        show_ne[i][3],show_ne[i][4],show_ne[i][5])
 
     def __init__(self, parent,controller):
         tk.Frame.__init__(self, parent)
@@ -84,6 +118,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL00.configure(insertbackground="black")
         self.payoffEntryL00.configure(selectbackground="blue")
         self.payoffEntryL00.configure(selectforeground="white")
+        self.payoffEntryL00.configure(relief="flat")
 
         self.payoffEntryR00 = tk.Entry(self.payoffFrame00)
         self.payoffEntryR00.place(relx=0.594, rely=0.318, height=32
@@ -97,6 +132,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR00.configure(insertbackground="black")
         self.payoffEntryR00.configure(selectbackground="blue")
         self.payoffEntryR00.configure(selectforeground="white")
+        self.payoffEntryR00.configure(relief="flat")
 
         self.payoffLP00 = tk.Label(self.payoffFrame00)
         self.payoffLP00.place(relx=0.051, rely=0.216, height=40, width=16)
@@ -156,6 +192,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL01.configure(insertbackground="black")
         self.payoffEntryL01.configure(selectbackground="blue")
         self.payoffEntryL01.configure(selectforeground="white")
+        self.payoffEntryL01.configure(relief="flat")
 
         self.payoffEntryR01 = tk.Entry(self.payoffFrame01)
         self.payoffEntryR01.place(relx=0.594, rely=0.318, height=32
@@ -169,6 +206,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR01.configure(insertbackground="black")
         self.payoffEntryR01.configure(selectbackground="blue")
         self.payoffEntryR01.configure(selectforeground="white")
+        self.payoffEntryR01.configure(relief="flat")
 
         self.payoffLP01 = tk.Label(self.payoffFrame01)
         self.payoffLP01.place(relx=0.051, rely=0.216, height=40, width=16)
@@ -228,6 +266,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL10.configure(insertbackground="black")
         self.payoffEntryL10.configure(selectbackground="blue")
         self.payoffEntryL10.configure(selectforeground="white")
+        self.payoffEntryL10.configure(relief="flat")
 
         self.payoffEntryR10 = tk.Entry(self.payoffFrame10)
         self.payoffEntryR10.place(relx=0.594, rely=0.31, height=32
@@ -242,6 +281,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR10.configure(insertbackground="black")
         self.payoffEntryR10.configure(selectbackground="blue")
         self.payoffEntryR10.configure(selectforeground="white")
+        self.payoffEntryR10.configure(relief="flat")
 
         self.payoffLP10 = tk.Label(self.payoffFrame10)
         self.payoffLP10.place(relx=0.051, rely=0.207, height=40, width=16)
@@ -302,6 +342,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryL11.configure(insertbackground="black")
         self.payoffEntryL11.configure(selectbackground="blue")
         self.payoffEntryL11.configure(selectforeground="white")
+        self.payoffEntryL11.configure(relief="flat")
 
         self.payoffEntryR11 = tk.Entry(self.payoffFrame11)
         self.payoffEntryR11.place(relx=0.594, rely=0.31, height=32
@@ -315,6 +356,7 @@ class PureNEPage(tk.Frame):
         self.payoffEntryR11.configure(insertbackground="black")
         self.payoffEntryR11.configure(selectbackground="blue")
         self.payoffEntryR11.configure(selectforeground="white")
+        self.payoffEntryR11.configure(relief="flat")
 
         self.payoffLP11 = tk.Label(self.payoffFrame11)
         self.payoffLP11.place(relx=0.051, rely=0.207, height=40, width=16)
