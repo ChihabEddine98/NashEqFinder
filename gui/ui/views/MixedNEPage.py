@@ -4,6 +4,85 @@ from algos.Solver import *
 
 
 class MixedNEPage(tk.Frame):
+
+    def resetColors(self):
+        # 0,0 Case !
+        self.payoffFrame00.configure(background="#000")
+        self.payoffLP00.configure(background="#000")
+        self.payoffLP00.configure(foreground="#fff")
+        self.payoffRP00.configure(background="#000")
+        self.payoffRP00.configure(foreground="#fff")
+        self.payoffV00.configure(background="#000")
+        self.payoffV00.configure(foreground="#fff")
+        self.payoffEntryL00.configure(background="#d0d5db")
+        self.payoffEntryR00.configure(background="#d0d5db")
+        # 0,0 Case !
+        self.payoffFrame01.configure(background="#000")
+        self.payoffLP01.configure(background="#000")
+        self.payoffLP01.configure(foreground="#fff")
+        self.payoffRP01.configure(background="#000")
+        self.payoffRP01.configure(foreground="#fff")
+        self.payoffV01.configure(background="#000")
+        self.payoffV01.configure(foreground="#fff")
+        self.payoffEntryL01.configure(background="#d0d5db")
+        self.payoffEntryR01.configure(background="#d0d5db")
+
+        # 0,0 Case !
+        self.payoffFrame10.configure(background="#000")
+        self.payoffLP10.configure(background="#000")
+        self.payoffLP10.configure(foreground="#fff")
+        self.payoffRP10.configure(background="#000")
+        self.payoffRP10.configure(foreground="#fff")
+        self.payoffV10.configure(background="#000")
+        self.payoffV10.configure(foreground="#fff")
+        self.payoffEntryL10.configure(background="#d0d5db")
+        self.payoffEntryR10.configure(background="#d0d5db")
+
+        # 0,0 Case !
+        self.payoffFrame11.configure(background="#000")
+        self.payoffLP11.configure(background="#000")
+        self.payoffLP11.configure(foreground="#fff")
+        self.payoffRP11.configure(background="#000")
+        self.payoffRP11.configure(foreground="#fff")
+        self.payoffV11.configure(background="#000")
+        self.payoffV11.configure(foreground="#fff")
+        self.payoffEntryL11.configure(background="#d0d5db")
+        self.payoffEntryR11.configure(background="#d0d5db")
+
+    def reset(self):
+        valNull1=tk.StringVar()
+        valNull1.set("")
+        self.payoffEntryL00.configure(text=valNull1)
+
+        valNull2 = tk.StringVar()
+        valNull2.set("")
+        self.payoffEntryL10.configure(textvariable=valNull2)
+
+        valNull3 = tk.StringVar()
+        valNull3.set("")
+        self.payoffEntryL11.configure(textvariable=valNull3)
+
+        valNull4 = tk.StringVar()
+        valNull4.set("")
+        self.payoffEntryR00.configure(textvariable=valNull4)
+
+        valNull5 = tk.StringVar()
+        valNull5.set("")
+        self.payoffEntryR01.configure(textvariable=valNull5)
+
+        valNull6 = tk.StringVar()
+        valNull6.set("")
+        self.payoffEntryR10.configure(textvariable=valNull6)
+
+        valNull7 = tk.StringVar()
+        valNull7.set("")
+        self.payoffEntryR11.configure(textvariable=valNull7)
+
+        valNull8 = tk.StringVar()
+        valNull8.set("")
+        self.payoffEntryL01.configure(textvariable=valNull8)
+        self.resetColors()
+
     def showNE(self,frame,lp,v,rp,lpo,rpo):
         bg_color="#28fa63"
         fg_color="black"
@@ -451,8 +530,23 @@ class MixedNEPage(tk.Frame):
         self.Label1.configure(foreground="#ff3136")
         self.Label1.configure(text='''Player II''')
 
+        self.btnReset = tk.Button(self.mainFrame,cursor="hand2")
+        self.btnReset.place(relx=0.720, rely=0.42, height=63, width=136)
+        self.btnReset.configure(activebackground="#ececec")
+        self.btnReset.configure(activeforeground="#000000")
+        self.btnReset.configure(background="#000")
+        self.btnReset.configure(disabledforeground="#a3a3a3")
+        self.btnReset.configure(font="-family {MV Boli} -size 24")
+        self.btnReset.configure(foreground="#ff3d5e")
+        self.btnReset.configure(highlightbackground="#d9d9d9")
+        self.btnReset.configure(highlightcolor="black")
+        self.btnReset.configure(pady="0")
+        self.btnReset.configure(relief="groove")
+        self.btnReset.configure(text='''Reset''')
+        self.btnReset.configure(command= lambda : self.reset())
+
         self.btnSolve = tk.Button(self.mainFrame, cursor="hand2")
-        self.btnSolve.place(relx=0.720, rely=0.520, height=63, width=136)
+        self.btnSolve.place(relx=0.720, rely=0.62, height=63, width=136)
         self.btnSolve.configure(activebackground="#ececec")
         self.btnSolve.configure(activeforeground="#000000")
         self.btnSolve.configure(background="#000")
