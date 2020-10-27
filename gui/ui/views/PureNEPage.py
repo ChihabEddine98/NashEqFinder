@@ -2,6 +2,15 @@ import tkinter as tk
 
 
 class PureNEPage(tk.Frame):
+    def solve(self):
+        # We need to transofrm our GUI entries to variables  !
+        po00=(int(self.payoffEntryL00.get()),int(self.payoffEntryR00.get()))
+        po01=(int(self.payoffEntryL01.get()),int(self.payoffEntryR01.get()))
+        po10=(int(self.payoffEntryL10.get()),int(self.payoffEntryR10.get()))
+        po11=(int(self.payoffEntryL11.get()),int(self.payoffEntryR11.get()))
+        payoff=[[po00,po01],[po10,po11]]
+        print(payoff)
+
     def __init__(self, parent,controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -478,3 +487,19 @@ class PureNEPage(tk.Frame):
         self.Button1.configure(pady="0")
         self.Button1.configure(relief="groove")
         self.Button1.configure(text='''Solve''')
+
+        self.btnRetour = tk.Button(self.mainFrame)
+        self.btnRetour.place(relx=0.031, rely=0.916, height=40, width=145)
+        self.btnRetour.configure(activebackground="#ff3d5e")
+        self.btnRetour.configure(activeforeground="#000000")
+        self.btnRetour.configure(background="#000")
+        self.btnRetour.configure(disabledforeground="#a3a3a3")
+        self.btnRetour.configure(font="-family {MV Boli} -size 20")
+        self.btnRetour.configure(foreground="#ff3d5e")
+        self.btnRetour.configure(highlightbackground="#d9d9d9")
+        self.btnRetour.configure(highlightcolor="black")
+        self.btnRetour.configure(pady="0")
+        self.btnRetour.configure(relief="groove")
+        self.btnRetour.configure(text='''Go Back''')
+        self.Button1.configure(command= lambda : self.solve())
+        self.btnRetour.configure(command=lambda: controller.show_frame("WelcomePage"))
