@@ -7,48 +7,60 @@ from algos.Solver import *
 class PureNEPage(tk.Frame):
 
     def resetColors(self):
+        bg_col = "#000"
+        fg_col = "#fff"
+        p1_col = "#1efff3"
+        p2_col = "#ff3d5e"
         # 0,0 Case !
-        self.payoffFrame00.configure(background="#000")
-        self.payoffLP00.configure(background="#000")
-        self.payoffLP00.configure(foreground="#fff")
-        self.payoffRP00.configure(background="#000")
-        self.payoffRP00.configure(foreground="#fff")
-        self.payoffV00.configure(background="#000")
-        self.payoffV00.configure(foreground="#fff")
-        self.payoffEntryL00.configure(background="#d0d5db")
-        self.payoffEntryR00.configure(background="#d0d5db")
-        # 0,0 Case !
-        self.payoffFrame01.configure(background="#000")
-        self.payoffLP01.configure(background="#000")
-        self.payoffLP01.configure(foreground="#fff")
-        self.payoffRP01.configure(background="#000")
-        self.payoffRP01.configure(foreground="#fff")
-        self.payoffV01.configure(background="#000")
-        self.payoffV01.configure(foreground="#fff")
-        self.payoffEntryL01.configure(background="#d0d5db")
-        self.payoffEntryR01.configure(background="#d0d5db")
+        self.payoffFrame00.configure(background=bg_col)
+        self.payoffLP00.configure(background=bg_col)
+        self.payoffLP00.configure(foreground=fg_col)
+        self.payoffRP00.configure(background=bg_col)
+        self.payoffRP00.configure(foreground=fg_col)
+        self.payoffV00.configure(background=bg_col)
+        self.payoffV00.configure(foreground=fg_col)
+        self.payoffEntryL00.configure(background=bg_col, relief="groove")
+        self.payoffEntryR00.configure(background=bg_col, relief="groove")
+        self.payoffEntryL00.configure(foreground=p1_col)
+        self.payoffEntryR00.configure(foreground=p2_col)
+        # 0,1 Case !
+        self.payoffFrame01.configure(background=bg_col)
+        self.payoffLP01.configure(background=bg_col)
+        self.payoffLP01.configure(foreground=fg_col)
+        self.payoffRP01.configure(background=bg_col)
+        self.payoffRP01.configure(foreground=fg_col)
+        self.payoffV01.configure(background=bg_col)
+        self.payoffV01.configure(foreground=fg_col)
+        self.payoffEntryL01.configure(background=bg_col, relief="groove")
+        self.payoffEntryR01.configure(background=bg_col, relief="groove")
+        self.payoffEntryL01.configure(foreground=p1_col)
+        self.payoffEntryR01.configure(foreground=p2_col)
 
-        # 0,0 Case !
-        self.payoffFrame10.configure(background="#000")
-        self.payoffLP10.configure(background="#000")
-        self.payoffLP10.configure(foreground="#fff")
-        self.payoffRP10.configure(background="#000")
-        self.payoffRP10.configure(foreground="#fff")
-        self.payoffV10.configure(background="#000")
-        self.payoffV10.configure(foreground="#fff")
-        self.payoffEntryL10.configure(background="#d0d5db")
-        self.payoffEntryR10.configure(background="#d0d5db")
+        # 1,0 Case !
+        self.payoffFrame10.configure(background=bg_col)
+        self.payoffLP10.configure(background=bg_col)
+        self.payoffLP10.configure(foreground=fg_col)
+        self.payoffRP10.configure(background=bg_col)
+        self.payoffRP10.configure(foreground=fg_col)
+        self.payoffV10.configure(background=bg_col)
+        self.payoffV10.configure(foreground=fg_col)
+        self.payoffEntryL10.configure(background=bg_col, relief="groove")
+        self.payoffEntryR10.configure(background=bg_col, relief="groove")
+        self.payoffEntryL10.configure(foreground=p1_col)
+        self.payoffEntryR10.configure(foreground=p2_col)
 
-        # 0,0 Case !
-        self.payoffFrame11.configure(background="#000")
-        self.payoffLP11.configure(background="#000")
-        self.payoffLP11.configure(foreground="#fff")
-        self.payoffRP11.configure(background="#000")
-        self.payoffRP11.configure(foreground="#fff")
-        self.payoffV11.configure(background="#000")
-        self.payoffV11.configure(foreground="#fff")
-        self.payoffEntryL11.configure(background="#d0d5db")
-        self.payoffEntryR11.configure(background="#d0d5db")
+        # 1,1 Case !
+        self.payoffFrame11.configure(background=bg_col)
+        self.payoffLP11.configure(background=bg_col)
+        self.payoffLP11.configure(foreground=fg_col)
+        self.payoffRP11.configure(background=bg_col)
+        self.payoffRP11.configure(foreground=fg_col)
+        self.payoffV11.configure(background=bg_col)
+        self.payoffV11.configure(foreground=fg_col)
+        self.payoffEntryL11.configure(background=bg_col, relief="groove")
+        self.payoffEntryR11.configure(background=bg_col, relief="groove")
+        self.payoffEntryL11.configure(foreground=p1_col)
+        self.payoffEntryR11.configure(foreground=p2_col)
 
     def reset(self):
         valNull1=tk.StringVar()
@@ -98,6 +110,8 @@ class PureNEPage(tk.Frame):
         lp.configure(foreground=fg_color)
         rp.configure(foreground=fg_color)
         v.configure(foreground=fg_color)
+        lpo.configure(foreground=fg_color,relief="flat")
+        rpo.configure(foreground=fg_color,relief="flat")
 
     def solve(self):
 
@@ -145,7 +159,10 @@ class PureNEPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.configure(background="#000")
-
+        bg_col="#000"
+        fg_col="#fff"
+        p1_col="#1efff3"
+        p2_col="#ff3d5e"
 
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
@@ -166,12 +183,12 @@ class PureNEPage(tk.Frame):
         self.titleFrame.configure(background="#000000")
 
         self.titleLabel = tk.Label(self.titleFrame)
-        self.titleLabel.place(relx=0.284, rely=0.241, height=34, width=382)
+        self.titleLabel.place(relx=0.168, rely=0.241, height=34, width=600)
         self.titleLabel.configure(background="#000000")
         self.titleLabel.configure(disabledforeground="#a3a3a3")
         self.titleLabel.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.titleLabel.configure(foreground="#fff")
-        self.titleLabel.configure(text='''Pure Nash Equilibria''')
+        self.titleLabel.configure(text='''Pure & Mixed Nash Equilibria''')
 
         self.mainFrame = tk.Frame(self)
         self.mainFrame.place(relx=0.041, rely=0.176, relheight=0.728
@@ -197,33 +214,33 @@ class PureNEPage(tk.Frame):
         self.payoffFrame00.configure(highlightbackground="#d9d9d9")
         self.payoffFrame00.configure(highlightcolor="black")
 
-        self.payoffEntryL00 = tk.Entry(self.payoffFrame00)
-        self.payoffEntryL00.place(relx=0.161, rely=0.318, height=32
+        self.payoffEntryL00 = tk.Entry(self.payoffFrame00,justify="center")
+        self.payoffEntryL00.place(relx=0.161, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryL00.configure(background="#d0d5db")
+        self.payoffEntryL00.configure(background=bg_col)
         self.payoffEntryL00.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL00.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryL00.configure(foreground="#000000")
+        self.payoffEntryL00.configure(foreground=p1_col)
         self.payoffEntryL00.configure(highlightbackground="#d9d9d9")
         self.payoffEntryL00.configure(highlightcolor="black")
-        self.payoffEntryL00.configure(insertbackground="black")
+        self.payoffEntryL00.configure(insertbackground=fg_col)
         self.payoffEntryL00.configure(selectbackground="blue")
         self.payoffEntryL00.configure(selectforeground="white")
-        self.payoffEntryL00.configure(relief="flat")
+        self.payoffEntryL00.configure(relief="groove")
 
-        self.payoffEntryR00 = tk.Entry(self.payoffFrame00)
-        self.payoffEntryR00.place(relx=0.594, rely=0.318, height=32
+        self.payoffEntryR00 = tk.Entry(self.payoffFrame00,justify="center")
+        self.payoffEntryR00.place(relx=0.594, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryR00.configure(background="#d0d5db")
+        self.payoffEntryR00.configure(background=bg_col)
         self.payoffEntryR00.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR00.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryR00.configure(foreground="#000000")
+        self.payoffEntryR00.configure(foreground=p2_col)
         self.payoffEntryR00.configure(highlightbackground="#d9d9d9")
         self.payoffEntryR00.configure(highlightcolor="black")
-        self.payoffEntryR00.configure(insertbackground="black")
+        self.payoffEntryR00.configure(insertbackground=fg_col)
         self.payoffEntryR00.configure(selectbackground="blue")
         self.payoffEntryR00.configure(selectforeground="white")
-        self.payoffEntryR00.configure(relief="flat")
+        self.payoffEntryR00.configure(relief="groove")
 
         self.payoffLP00 = tk.Label(self.payoffFrame00)
         self.payoffLP00.place(relx=0.051, rely=0.216, height=40, width=16)
@@ -271,33 +288,33 @@ class PureNEPage(tk.Frame):
         self.payoffFrame01.configure(highlightbackground="#d9d9d9")
         self.payoffFrame01.configure(highlightcolor="black")
 
-        self.payoffEntryL01 = tk.Entry(self.payoffFrame01)
-        self.payoffEntryL01.place(relx=0.161, rely=0.318, height=32
+        self.payoffEntryL01 = tk.Entry(self.payoffFrame01,justify="center")
+        self.payoffEntryL01.place(relx=0.161, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryL01.configure(background="#d0d5db")
+        self.payoffEntryL01.configure(background=bg_col)
         self.payoffEntryL01.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL01.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryL01.configure(foreground="#000000")
+        self.payoffEntryL01.configure(foreground=p1_col)
         self.payoffEntryL01.configure(highlightbackground="#d9d9d9")
-        self.payoffEntryL01.configure(highlightcolor="black")
-        self.payoffEntryL01.configure(insertbackground="black")
+        self.payoffEntryL01.configure(highlightcolor=fg_col)
+        self.payoffEntryL01.configure(insertbackground=fg_col)
         self.payoffEntryL01.configure(selectbackground="blue")
         self.payoffEntryL01.configure(selectforeground="white")
-        self.payoffEntryL01.configure(relief="flat")
+        self.payoffEntryL01.configure(relief="groove")
 
-        self.payoffEntryR01 = tk.Entry(self.payoffFrame01)
-        self.payoffEntryR01.place(relx=0.594, rely=0.318, height=32
+        self.payoffEntryR01 = tk.Entry(self.payoffFrame01,justify="center")
+        self.payoffEntryR01.place(relx=0.594, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryR01.configure(background="#d0d5db")
+        self.payoffEntryR01.configure(background=bg_col)
         self.payoffEntryR01.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR01.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryR01.configure(foreground="#000000")
+        self.payoffEntryR01.configure(foreground=p2_col)
         self.payoffEntryR01.configure(highlightbackground="#d9d9d9")
         self.payoffEntryR01.configure(highlightcolor="black")
-        self.payoffEntryR01.configure(insertbackground="black")
+        self.payoffEntryR01.configure(insertbackground=fg_col)
         self.payoffEntryR01.configure(selectbackground="blue")
         self.payoffEntryR01.configure(selectforeground="white")
-        self.payoffEntryR01.configure(relief="flat")
+        self.payoffEntryR01.configure(relief="groove")
 
         self.payoffLP01 = tk.Label(self.payoffFrame01)
         self.payoffLP01.place(relx=0.051, rely=0.216, height=40, width=16)
@@ -345,34 +362,34 @@ class PureNEPage(tk.Frame):
         self.payoffFrame10.configure(highlightbackground="#d9d9d9")
         self.payoffFrame10.configure(highlightcolor="black")
 
-        self.payoffEntryL10 = tk.Entry(self.payoffFrame10)
-        self.payoffEntryL10.place(relx=0.161, rely=0.31, height=32
+        self.payoffEntryL10 = tk.Entry(self.payoffFrame10,justify="center")
+        self.payoffEntryL10.place(relx=0.161, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryL10.configure(background="#d0d5db")
+        self.payoffEntryL10.configure(background=bg_col)
         self.payoffEntryL10.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL10.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryL10.configure(foreground="#000000")
+        self.payoffEntryL10.configure(foreground=p1_col)
         self.payoffEntryL10.configure(highlightbackground="#d9d9d9")
         self.payoffEntryL10.configure(highlightcolor="black")
-        self.payoffEntryL10.configure(insertbackground="black")
+        self.payoffEntryL10.configure(insertbackground=fg_col)
         self.payoffEntryL10.configure(selectbackground="blue")
         self.payoffEntryL10.configure(selectforeground="white")
-        self.payoffEntryL10.configure(relief="flat")
+        self.payoffEntryL10.configure(relief="groove")
 
-        self.payoffEntryR10 = tk.Entry(self.payoffFrame10)
-        self.payoffEntryR10.place(relx=0.594, rely=0.31, height=32
+        self.payoffEntryR10 = tk.Entry(self.payoffFrame10,justify="center")
+        self.payoffEntryR10.place(relx=0.594, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryR10.configure(background="#d0d5db")
+        self.payoffEntryR10.configure(background=bg_col)
         self.payoffEntryR10.configure(relief='flat')
         self.payoffEntryR10.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR10.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryR10.configure(foreground="#000000")
+        self.payoffEntryR10.configure(foreground=p2_col)
         self.payoffEntryR10.configure(highlightbackground="#d9d9d9")
         self.payoffEntryR10.configure(highlightcolor="black")
-        self.payoffEntryR10.configure(insertbackground="black")
+        self.payoffEntryR10.configure(insertbackground=fg_col)
         self.payoffEntryR10.configure(selectbackground="blue")
         self.payoffEntryR10.configure(selectforeground="white")
-        self.payoffEntryR10.configure(relief="flat")
+        self.payoffEntryR10.configure(relief="groove")
 
         self.payoffLP10 = tk.Label(self.payoffFrame10)
         self.payoffLP10.place(relx=0.051, rely=0.207, height=40, width=16)
@@ -421,33 +438,33 @@ class PureNEPage(tk.Frame):
         self.payoffFrame11.configure(highlightbackground="#d9d9d9")
         self.payoffFrame11.configure(highlightcolor="black")
 
-        self.payoffEntryL11 = tk.Entry(self.payoffFrame11)
-        self.payoffEntryL11.place(relx=0.161, rely=0.31, height=32
+        self.payoffEntryL11 = tk.Entry(self.payoffFrame11,justify="center")
+        self.payoffEntryL11.place(relx=0.161, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryL11.configure(background="#d0d5db")
+        self.payoffEntryL11.configure(background=bg_col)
         self.payoffEntryL11.configure(disabledforeground="#a3a3a3")
         self.payoffEntryL11.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryL11.configure(foreground="#000000")
+        self.payoffEntryL11.configure(foreground=p1_col)
         self.payoffEntryL11.configure(highlightbackground="#d9d9d9")
         self.payoffEntryL11.configure(highlightcolor="black")
-        self.payoffEntryL11.configure(insertbackground="black")
+        self.payoffEntryL11.configure(insertbackground=fg_col)
         self.payoffEntryL11.configure(selectbackground="blue")
         self.payoffEntryL11.configure(selectforeground="white")
-        self.payoffEntryL11.configure(relief="flat")
+        self.payoffEntryL11.configure(relief="groove")
 
-        self.payoffEntryR11 = tk.Entry(self.payoffFrame11)
-        self.payoffEntryR11.place(relx=0.594, rely=0.31, height=32
+        self.payoffEntryR11 = tk.Entry(self.payoffFrame11,justify="center")
+        self.payoffEntryR11.place(relx=0.594, rely=0.25, height=42
                 , relwidth=0.203)
-        self.payoffEntryR11.configure(background="#d0d5db")
+        self.payoffEntryR11.configure(background=bg_col)
         self.payoffEntryR11.configure(disabledforeground="#a3a3a3")
         self.payoffEntryR11.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.payoffEntryR11.configure(foreground="#000000")
+        self.payoffEntryR11.configure(foreground=p2_col)
         self.payoffEntryR11.configure(highlightbackground="#d9d9d9")
         self.payoffEntryR11.configure(highlightcolor="black")
-        self.payoffEntryR11.configure(insertbackground="black")
+        self.payoffEntryR11.configure(insertbackground=fg_col)
         self.payoffEntryR11.configure(selectbackground="blue")
         self.payoffEntryR11.configure(selectforeground="white")
-        self.payoffEntryR11.configure(relief="flat")
+        self.payoffEntryR11.configure(relief="groove")
 
         self.payoffLP11 = tk.Label(self.payoffFrame11)
         self.payoffLP11.place(relx=0.051, rely=0.207, height=40, width=16)
@@ -542,6 +559,7 @@ class PureNEPage(tk.Frame):
         self.Label1.configure(foreground="#ff3136")
         self.Label1.configure(text='''Player II''')
 
+
         self.btnReset = tk.Button(self.mainFrame,cursor="hand2")
         self.btnReset.place(relx=0.720, rely=0.42, height=63, width=136)
         self.btnReset.configure(activebackground="#ececec")
@@ -571,6 +589,7 @@ class PureNEPage(tk.Frame):
         self.btnSolve.configure(relief="groove")
         self.btnSolve.configure(text='''Solve''')
         self.btnSolve.configure(command= lambda : self.solve())
+
 
 
         self.btnRetour = tk.Button(self.mainFrame,cursor="hand2")
