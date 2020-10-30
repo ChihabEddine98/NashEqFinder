@@ -96,6 +96,8 @@ class MixedNEPage(tk.Frame):
         valNull8.set("")
         self.payoffEntryL01.configure(textvariable=valNull8)
         self.resetColors()
+        self.resultLabel.config(text='')
+
 
     def showNE(self,frame,lp,v,rp,lpo,rpo):
         bg_color="#28fa63"
@@ -125,15 +127,17 @@ class MixedNEPage(tk.Frame):
             s = Solver(payoff=M)
             result=s.solve(0, 1)
             if(result[0] is None or result[1] is None):
-                msg = f'Found Mixed NE : \np∈[0,1] \nq∈[0,1]'
+                msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1] \nq∈[0,1]'
             else:
                 if(result[0]<0 or result[0]>1):
-                    msg = f'Found Mixed NE : \np∈[0,1] \nq = 0'
+                    msg = f'Nash Equiliberia Mixed Strategies: \np∈[0,1] \nq = 0'
                 elif(result[1]<0 or result[1]>1):
-                    msg = f'Found Mixed NE : \np=0 \nq∈[0,1]'
+                    msg = f'Nash Equiliberia Mixed Strategies : \np=0 \nq∈[0,1]'
                 else:
-                    msg=f'Found Mixed NE : \np = {result[0]} \nq = {result[1]}'
-            messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
+                    msg=f'Nash Equiliberia Mixed Strategies : \np = {result[0]} \nq = {result[1]}'
+            # messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
+            self.resultLabel.config(text=msg)
+
         except ValueError as verr:
             showerror(title=" Invalid PayOff", message=" All entries need to be Integers!")
             return
@@ -169,7 +173,7 @@ class MixedNEPage(tk.Frame):
         self.titleLabel.configure(disabledforeground="#a3a3a3")
         self.titleLabel.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.titleLabel.configure(foreground="#fff")
-        self.titleLabel.configure(text='''Pure & Mixed Nash Equilibria''')
+        self.titleLabel.configure(text='''Mixed Nash Equilibria''')
 
         self.mainFrame = tk.Frame(self)
         self.mainFrame.place(relx=0.041, rely=0.176, relheight=0.728
@@ -507,7 +511,7 @@ class MixedNEPage(tk.Frame):
         self.Label1_2_2.configure(text='''B''')
 
         self.Label1_2_3 = tk.Label(self.mainFrame)
-        self.Label1_2_3.place(relx=0.22, rely=0.222, height=43, width=78)
+        self.Label1_2_3.place(relx=0.22, rely=0.25, height=43, width=78)
         self.Label1_2_3.configure(activebackground="#f9f9f9")
         self.Label1_2_3.configure(activeforeground="black")
         self.Label1_2_3.configure(background="#000")
@@ -519,7 +523,7 @@ class MixedNEPage(tk.Frame):
         self.Label1_2_3.configure(text='''C''')
 
         self.Label1_2_4 = tk.Label(self.mainFrame)
-        self.Label1_2_4.place(relx=0.473, rely=0.222, height=43, width=78)
+        self.Label1_2_4.place(relx=0.473, rely=0.25, height=43, width=78)
         self.Label1_2_4.configure(activebackground="#f9f9f9")
         self.Label1_2_4.configure(activeforeground="black")
         self.Label1_2_4.configure(background="#000")
@@ -529,14 +533,6 @@ class MixedNEPage(tk.Frame):
         self.Label1_2_4.configure(highlightbackground="#d9d9d9")
         self.Label1_2_4.configure(highlightcolor="black")
         self.Label1_2_4.configure(text='''D''')
-
-        self.Label1 = tk.Label(self.mainFrame)
-        self.Label1.place(relx=0.297, rely=0.06, height=52, width=153)
-        self.Label1.configure(background="#000")
-        self.Label1.configure(disabledforeground="#a3a3a3")
-        self.Label1.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.Label1.configure(foreground="#ff3136")
-        self.Label1.configure(text='''Player II''')
 
         self.btnReset = tk.Button(self.mainFrame, cursor="hand2")
         self.btnReset.place(relx=0.720, rely=0.42, height=63, width=136)
@@ -582,3 +578,17 @@ class MixedNEPage(tk.Frame):
         self.btnRetour.configure(relief="groove")
         self.btnRetour.configure(text='''Go Back''')
         self.btnRetour.configure(command=lambda: controller.show_frame("WelcomePage"))
+
+        self.resultLabel = tk.Label(self.mainFrame, justify="center")
+        self.resultLabel.place(relx=0.25, rely=0.0)
+        self.resultLabel.configure(activebackground="#ff3d5e")
+        self.resultLabel.configure(activeforeground="#000000")
+        self.resultLabel.configure(background="#000")
+        self.resultLabel.configure(disabledforeground="#a3a3a3")
+        self.resultLabel.configure(font="-family {MV Boli} -size 18")
+        self.resultLabel.configure(foreground="#0aff80")
+        self.resultLabel.configure(highlightbackground="#d9d9d9")
+        self.resultLabel.configure(highlightcolor="black")
+        self.resultLabel.configure(pady="0")
+        self.resultLabel.configure(relief="flat")
+        self.resultLabel.configure(text='''''')

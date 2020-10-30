@@ -95,7 +95,7 @@ class PureNEPage(tk.Frame):
         valNull8.set("")
         self.payoffEntryL01.configure(textvariable=valNull8)
         self.resetColors()
-
+        self.resultLabel.config(text='')
 
     def showNE(self,frame,lp,v,rp,lpo,rpo):
         bg_color="#28fa63"
@@ -126,6 +126,23 @@ class PureNEPage(tk.Frame):
             M = np.array(payoff)
             s = Solver(payoff=M)
             result=s.solve(1, 0)
+
+            strategies=[]
+            for r in result:
+                if(r[0]==0 and r[1]==0):
+                    strategies.append("(A,C)")
+                elif(r[0]==0 and r[1]==1):
+                    strategies.append("(A,D)")
+                elif(r[0]==1 and r[1]==0):
+                    strategies.append("(B,C)")
+                else:
+                    strategies.append("(B,D)")
+
+            ne=" , ".join(strategies)
+            ne_msg=f'Pure Nash Equiliberia Strategies :\n{ne}\n'
+            print(ne_msg)
+            self.resultLabel.config(text=ne_msg)
+
             po00 = (self.payoffFrame00, self.payoffLP00, self.payoffV00,
                     self.payoffRP00, self.payoffEntryL00, self.payoffEntryR00)
             po01 = (self.payoffFrame01, self.payoffLP01, self.payoffV01,
@@ -188,7 +205,7 @@ class PureNEPage(tk.Frame):
         self.titleLabel.configure(disabledforeground="#a3a3a3")
         self.titleLabel.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
         self.titleLabel.configure(foreground="#fff")
-        self.titleLabel.configure(text='''Pure & Mixed Nash Equilibria''')
+        self.titleLabel.configure(text='''Pure Nash Equilibria''')
 
         self.mainFrame = tk.Frame(self)
         self.mainFrame.place(relx=0.041, rely=0.176, relheight=0.728
@@ -528,7 +545,7 @@ class PureNEPage(tk.Frame):
         self.Label1_2_2.configure(text='''B''')
 
         self.Label1_2_3 = tk.Label(self.mainFrame)
-        self.Label1_2_3.place(relx=0.22, rely=0.222, height=43, width=78)
+        self.Label1_2_3.place(relx=0.22, rely=0.25, height=43, width=78)
         self.Label1_2_3.configure(activebackground="#f9f9f9")
         self.Label1_2_3.configure(activeforeground="black")
         self.Label1_2_3.configure(background="#000")
@@ -540,7 +557,7 @@ class PureNEPage(tk.Frame):
         self.Label1_2_3.configure(text='''C''')
 
         self.Label1_2_4 = tk.Label(self.mainFrame)
-        self.Label1_2_4.place(relx=0.473, rely=0.222, height=43, width=78)
+        self.Label1_2_4.place(relx=0.473, rely=0.25, height=43, width=78)
         self.Label1_2_4.configure(activebackground="#f9f9f9")
         self.Label1_2_4.configure(activeforeground="black")
         self.Label1_2_4.configure(background="#000")
@@ -551,13 +568,6 @@ class PureNEPage(tk.Frame):
         self.Label1_2_4.configure(highlightcolor="black")
         self.Label1_2_4.configure(text='''D''')
 
-        self.Label1 = tk.Label(self.mainFrame)
-        self.Label1.place(relx=0.297, rely=0.06, height=52, width=153)
-        self.Label1.configure(background="#000")
-        self.Label1.configure(disabledforeground="#a3a3a3")
-        self.Label1.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.Label1.configure(foreground="#ff3136")
-        self.Label1.configure(text='''Player II''')
 
 
         self.btnReset = tk.Button(self.mainFrame,cursor="hand2")
@@ -606,3 +616,19 @@ class PureNEPage(tk.Frame):
         self.btnRetour.configure(relief="groove")
         self.btnRetour.configure(text='''Go Back''')
         self.btnRetour.configure(command=lambda: controller.show_frame("WelcomePage"))
+
+        self.resultLabel = tk.Label(self.mainFrame,justify="center")
+        self.resultLabel.place(relx=0.25, rely=0.06, height=80)
+        self.resultLabel.configure(activebackground="#ff3d5e")
+        self.resultLabel.configure(activeforeground="#000000")
+        self.resultLabel.configure(background="#000")
+        self.resultLabel.configure(disabledforeground="#a3a3a3")
+        self.resultLabel.configure(font="-family {MV Boli} -size 18")
+        self.resultLabel.configure(foreground="#0aff80")
+        self.resultLabel.configure(highlightbackground="#d9d9d9")
+        self.resultLabel.configure(highlightcolor="black")
+        self.resultLabel.configure(pady="0")
+        self.resultLabel.configure(relief="flat")
+        self.resultLabel.configure(text='''''')
+
+

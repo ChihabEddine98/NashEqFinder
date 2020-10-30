@@ -96,6 +96,8 @@ class AiOPage(tk.Frame):
         valNull8.set("")
         self.payoffEntryL01.configure(textvariable=valNull8)
         self.resetColors()
+        self.resultLabel.config(text='')
+
 
     def showNE(self,frame,lp,v,rp,lpo,rpo):
         bg_color="#28fa63"
@@ -125,16 +127,34 @@ class AiOPage(tk.Frame):
             s = Solver(payoff=M)
             result = s.solve(1, 1)
             pure,mixed=result[0],result[1]
+
+            strategies=[]
+            for r in pure:
+                if(r[0]==0 and r[1]==0):
+                    strategies.append("(A,C)")
+                elif(r[0]==0 and r[1]==1):
+                    strategies.append("(A,D)")
+                elif(r[0]==1 and r[1]==0):
+                    strategies.append("(B,C)")
+                else:
+                    strategies.append("(B,D)")
+
+            ne=" , ".join(strategies)
+            ne_msg=f'Nash Equiliberia Pure Strategies :\n{ne}\n'
             if (mixed[0] is None or mixed[1] is None):
-                msg = f'Found Mixed NE : \np∈[0,1] \nq∈[0,1]'
+                msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
             else:
                 if (mixed[0] < 0 or mixed[0] > 1):
-                    msg = f'Found Mixed NE : \np∈[0,1] \nq = 0'
+                    msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq = 0'
                 elif (mixed[1] < 0 or mixed[1] > 1):
-                    msg = f'Found Mixed NE : \np=0 \nq∈[0,1]'
+                    msg = f'Nash Equiliberia Mixed Strategies : \np=0\nq∈[0,1]'
                 else:
-                    msg = f'Found Mixed NE : \np = {mixed[0]} \nq = {mixed[1]}'
-            showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
+                    msg = f'Nash Equiliberia Mixed Strategies : \np = {mixed[0]}\nq = {mixed[1]}'
+
+            print(ne_msg+msg)
+            self.resultLabel.config(text=ne_msg+msg)
+
+            # showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
 
             po00 = (self.payoffFrame00, self.payoffLP00, self.payoffV00,
                     self.payoffRP00, self.payoffEntryL00, self.payoffEntryR00)
@@ -180,7 +200,7 @@ class AiOPage(tk.Frame):
 
         self.titleFrame = tk.Frame(self)
 
-        self.titleFrame.place(relx=0.041, rely=0.028, relheight=0.124
+        self.titleFrame.place(relx=0.041, rely=0.0, relheight=0.1
                 , relwidth=0.928)
         self.titleFrame.configure(relief='flat')
         self.titleFrame.configure(borderwidth="2")
@@ -202,7 +222,7 @@ class AiOPage(tk.Frame):
         self.mainFrame.configure(background="#000")
 
         self.payoffMatrixFrame = tk.Frame(self.mainFrame)
-        self.payoffMatrixFrame.place(relx=0.11, rely=0.343, relheight=0.573
+        self.payoffMatrixFrame.place(relx=0.11, rely=0.350, relheight=0.573
                 , relwidth=0.605)
         self.payoffMatrixFrame.configure(relief='flat')
         self.payoffMatrixFrame.configure(borderwidth="2")
@@ -508,7 +528,7 @@ class AiOPage(tk.Frame):
 
 
         self.Label1_2 = tk.Label(self.mainFrame)
-        self.Label1_2.place(relx=0.01, rely=0.422, height=43, width=78)
+        self.Label1_2.place(relx=0.08, rely=0.438, height=43, width=50)
         self.Label1_2.configure(activebackground="#f9f9f9")
         self.Label1_2.configure(activeforeground="black")
         self.Label1_2.configure(background="#000")
@@ -520,7 +540,7 @@ class AiOPage(tk.Frame):
         self.Label1_2.configure(text='''A''')
 
         self.Label1_2_2 = tk.Label(self.mainFrame)
-        self.Label1_2_2.place(relx=0.01, rely=0.625, height=43, width=78)
+        self.Label1_2_2.place(relx=0.08, rely=0.638, height=43, width=50)
         self.Label1_2_2.configure(activebackground="#f9f9f9")
         self.Label1_2_2.configure(activeforeground="black")
         self.Label1_2_2.configure(background="#000")
@@ -532,7 +552,7 @@ class AiOPage(tk.Frame):
         self.Label1_2_2.configure(text='''B''')
 
         self.Label1_2_3 = tk.Label(self.mainFrame)
-        self.Label1_2_3.place(relx=0.22, rely=0.222, height=43, width=78)
+        self.Label1_2_3.place(relx=0.22, rely=0.29, height=43, width=78)
         self.Label1_2_3.configure(activebackground="#f9f9f9")
         self.Label1_2_3.configure(activeforeground="black")
         self.Label1_2_3.configure(background="#000")
@@ -544,7 +564,7 @@ class AiOPage(tk.Frame):
         self.Label1_2_3.configure(text='''C''')
 
         self.Label1_2_4 = tk.Label(self.mainFrame)
-        self.Label1_2_4.place(relx=0.473, rely=0.222, height=43, width=78)
+        self.Label1_2_4.place(relx=0.473, rely=0.29, height=43, width=78)
         self.Label1_2_4.configure(activebackground="#f9f9f9")
         self.Label1_2_4.configure(activeforeground="black")
         self.Label1_2_4.configure(background="#000")
@@ -554,14 +574,6 @@ class AiOPage(tk.Frame):
         self.Label1_2_4.configure(highlightbackground="#d9d9d9")
         self.Label1_2_4.configure(highlightcolor="black")
         self.Label1_2_4.configure(text='''D''')
-
-        self.Label1 = tk.Label(self.mainFrame)
-        self.Label1.place(relx=0.297, rely=0.06, height=52, width=153)
-        self.Label1.configure(background="#000")
-        self.Label1.configure(disabledforeground="#a3a3a3")
-        self.Label1.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
-        self.Label1.configure(foreground="#ff3136")
-        self.Label1.configure(text='''Player II''')
 
 
         self.btnReset = tk.Button(self.mainFrame,cursor="hand2")
@@ -610,3 +622,17 @@ class AiOPage(tk.Frame):
         self.btnRetour.configure(relief="groove")
         self.btnRetour.configure(text='''Go Back''')
         self.btnRetour.configure(command=lambda: controller.show_frame("WelcomePage"))
+
+        self.resultLabel = tk.Label(self.mainFrame,justify="center")
+        self.resultLabel.place(relx=0.25, rely=0)
+        self.resultLabel.configure(activebackground="#ff3d5e")
+        self.resultLabel.configure(activeforeground="#000000")
+        self.resultLabel.configure(background="#000")
+        self.resultLabel.configure(disabledforeground="#a3a3a3")
+        self.resultLabel.configure(font="-family {MV Boli} -size 16")
+        self.resultLabel.configure(foreground="#0aff80")
+        self.resultLabel.configure(highlightbackground="#d9d9d9")
+        self.resultLabel.configure(highlightcolor="black")
+        self.resultLabel.configure(pady="0")
+        self.resultLabel.configure(relief="flat")
+        self.resultLabel.configure(text='''''')
