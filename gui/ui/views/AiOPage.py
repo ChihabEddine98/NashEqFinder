@@ -231,21 +231,31 @@ class AiOPage(tk.Frame):
 
             ne=" , ".join(strategies)
             ne_msg=f'Nash Equiliberia Pure Strategies :\n{ne}\n'
+            problem = 0
+
             if (mixed[0] is None or mixed[1] is None):
-                if(mixed[0] is not None and mixed[0] < 1 and mixed[0] > 0):
+                if (mixed[0] is not None):
                     msg = f'Nash Equiliberia Mixed Strategies : \np={Fraction(mixed[0]).limit_denominator()}\nq∈[0,1]'
-                elif(mixed[1] is not None and mixed[1] < 1 and mixed[1] > 0):
+                elif (mixed[1] is not None):
                     msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq={Fraction(mixed[1]).limit_denominator()}'
                 else:
                     msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
-
             else:
-                if (mixed[0] < 0 or mixed[0] > 1):
-                    msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq = 0'
-                elif (mixed[1] < 0 or mixed[1] > 1):
-                    msg = f'Nash Equiliberia Mixed Strategies : \np=0\nq∈[0,1]'
+                if (mixed[0] > 1 or mixed[1] > 1):
+                    msg = f'No Nash Equilebria found in Mixed Strategies'
+                    problem = 1
+                elif (mixed[0] < 0):
+                    if (mixed[1] < 0):
+                        msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
+                    else:
+                        msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq={Fraction(mixed[1]).limit_denominator()}'
+                elif (mixed[1] < 0):
+                    if (mixed[0] < 0):
+                        msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
+                    else:
+                        msg = f'Nash Equiliberia Mixed Strategies : \np={Fraction(mixed[0]).limit_denominator()}\nq∈[0,1]'
                 else:
-                    msg = f'Nash Equiliberia Mixed Strategies : \np = {mixed[0]}\nq = {mixed[1]}'
+                    msg = f'Nash Equiliberia Mixed Strategies : \np = {mixed[0]} \nq = {mixed[1]}'
 
             print(ne_msg+msg)
             self.resultLabel.config(text=ne_msg+msg)
@@ -272,8 +282,9 @@ class AiOPage(tk.Frame):
                 self.showNE(show_ne[i][0], show_ne[i][1], show_ne[i][2],
                             show_ne[i][3], show_ne[i][4], show_ne[i][5])
 
-            self.PQgraph(mixed[0],mixed[1])
-            plt.show()
+            if(not problem):
+                self.PQgraph(mixed[0],mixed[1])
+                plt.show()
         except ValueError as verr:
             showerror(title=" Invalid PayOff", message=" All entries need to be Integers!")
             return

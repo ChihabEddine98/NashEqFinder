@@ -218,27 +218,46 @@ class MixedNEPage(tk.Frame):
             M=np.array(payoff)
             s = Solver(payoff=M)
             result=s.solve(0, 1)
+            problem=0
             if(result[0] is None or result[1] is None):
-                if (result[0] is not None and result[0] < 1 and result[0] > 0):
+                if (result[0] is not None):
                     msg = f'Nash Equiliberia Mixed Strategies : \np={Fraction(result[0]).limit_denominator()}\nq∈[0,1]'
-                elif (result[1] is not None and result[1] < 1 and result[1] > 0):
+                elif (result[1] is not None ):
                     msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq={Fraction(result[1]).limit_denominator()}'
                 else:
                     msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
             else:
-                if(result[0]<0 or result[0]>1):
-                    msg = f'Nash Equiliberia Mixed Strategies: \np∈[0,1] \nq = 0'
-                elif(result[1]<0 or result[1]>1):
-                    msg = f'Nash Equiliberia Mixed Strategies : \np=0 \nq∈[0,1]'
+                if (result[0] > 1 or result[1] > 1):
+                    msg = f'No Nash Equilebria found in Mixed Strategies'
+                    problem=1
+                elif (result[0] < 0):
+                    if (result[1] < 0):
+                        msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
+                    else:
+                        msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq={Fraction(result[1]).limit_denominator()}'
+                elif (result[1] < 0):
+                    if (result[0] < 0):
+                        msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
+                    else:
+                        msg = f'Nash Equiliberia Mixed Strategies : \np={Fraction(result[0]).limit_denominator()}\nq∈[0,1]'
                 else:
                     msg=f'Nash Equiliberia Mixed Strategies : \np = {result[0]} \nq = {result[1]}'
+
+                # if(result[0]>1 and result[1]>1):
+                #     msg = f'No Nash Equilebria found in Mixed Strategies'
+                # elif(result[0]<0 or result[0]>1):
+                #     msg = f'Nash Equiliberia Mixed Strategies: \np∈[0,1] \nq = 0'
+                # elif(result[1]<0 or result[1]>1):
+                #     msg = f'Nash Equiliberia Mixed Strategies : \np=0 \nq∈[0,1]'
+                # else:
+                #     msg=f'Nash Equiliberia Mixed Strategies : \np = {result[0]} \nq = {result[1]}'
 
 
             # messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
             self.resultLabel.configure(text=msg)
-
-            self.PQgraph(result[0],result[1])
-            plt.show()
+            if(not problem):
+                self.PQgraph(result[0],result[1])
+                plt.show()
 
 
 
