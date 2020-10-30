@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.messagebox import showerror
@@ -124,8 +126,11 @@ class MixedNEPage(tk.Frame):
         qLineStyle = '-'
 
         plt.axis([-0.009, 1.009, -0.009, 1.009])
+        custom_lines = [Line2D([0], [0], color=plineColor, lw=4),
+                        Line2D([0], [0], color=qlineColor, lw=4)]
 
-        if(p and q):
+
+        if((p is not None and p>0 and p<1) and (q is not None and q>0 and q<1)):
             # p graph !
             plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
             p1, p2 = [0, 0], [p, 0]
@@ -150,35 +155,57 @@ class MixedNEPage(tk.Frame):
 
             plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
 
-        elif(q and not p):
+        elif((q or q==0) and (p is None or p<0 or p>1)):
+            print(f' graaaaph NP Q : {p},{q}')
+
             # q graph !
-            plt.axhline(q, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
-            p1, p2 = [0, q], [0,1]
-            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+            if(q==0):
+                p1, p2 = [0, q], [0,1]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+                plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
 
-            p1, p2 = [1, q], [1, 0]
-            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+                plt.axhline(q, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
 
-            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
-            plt.fill_between([0,1],1,alpha=0.3,hatch='x',edgecolor=plineColor)
-        elif(p and not q):
-            # p graph !
-            plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
-            p1, p2 = [0, 0], [p, 0]
-            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+            else:
+                plt.axhline(q, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
+                p1, p2 = [0, q], [0,1]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+                plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
 
-            p1, p2 = [p, 1], [1, 1]
-            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+                p1, p2 = [1, q], [1, 0]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
-            plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
+                plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+                plt.fill_between([0,1],1,alpha=0.3,hatch='x',edgecolor=plineColor)
+        elif((p or p==0) and (q is None or q<0 or q>1)):
+
+            if(p==0):
+                plt.fill_between([0,1],1,alpha=0.3,hatch='x',edgecolor=qlineColor)
+                plt.axhline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+            else:
+                # p graph !
+                plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+                p1, p2 = [0, 0], [p, 0]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+                p1, p2 = [p, 1], [1, 1]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+                plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
         else:
+            print(f' graaaaph NP NQ : {p},{q}')
+
             plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=plineColor)
             plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
+
+
+        plt.legend(custom_lines,['Player I','Player II'])
 
 
 
@@ -195,7 +222,6 @@ class MixedNEPage(tk.Frame):
             result=s.solve(0, 1)
             if(result[0] is None or result[1] is None):
                 msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1] \nq∈[0,1]'
-                self.PQgraph(result[0], result[1])
             else:
                 if(result[0]<0 or result[0]>1):
                     msg = f'Nash Equiliberia Mixed Strategies: \np∈[0,1] \nq = 0'
@@ -203,10 +229,12 @@ class MixedNEPage(tk.Frame):
                     msg = f'Nash Equiliberia Mixed Strategies : \np=0 \nq∈[0,1]'
                 else:
                     msg=f'Nash Equiliberia Mixed Strategies : \np = {result[0]} \nq = {result[1]}'
-                    self.PQgraph(result[0],result[1])
+
 
             # messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
             self.resultLabel.configure(text=msg)
+
+            self.PQgraph(result[0],result[1])
             plt.show()
 
 
