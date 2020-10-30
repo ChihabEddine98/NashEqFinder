@@ -5,7 +5,11 @@ The GUI version can easily been used you have just to introduce your payoff matr
 
 > **Note:** The **Non integers** filled entries will be automatically rejected with an 
 > error message  
-> 
+
+#### Run the app : 
+>**`python main.py`** 
+
+
 ## Used Libraries ( Requirements )
  
  |                |Install|Utility                         |
