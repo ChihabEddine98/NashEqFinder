@@ -219,7 +219,12 @@ class MixedNEPage(tk.Frame):
             s = Solver(payoff=M)
             result=s.solve(0, 1)
             if(result[0] is None or result[1] is None):
-                msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1] \nq∈[0,1]'
+                if (result[0] is not None and result[0] < 1 and result[0] > 0):
+                    msg = f'Nash Equiliberia Mixed Strategies : \np={Fraction(result[0]).limit_denominator()}\nq∈[0,1]'
+                elif (result[1] is not None and result[1] < 1 and result[1] > 0):
+                    msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq={Fraction(result[1]).limit_denominator()}'
+                else:
+                    msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
             else:
                 if(result[0]<0 or result[0]>1):
                     msg = f'Nash Equiliberia Mixed Strategies: \np∈[0,1] \nq = 0'

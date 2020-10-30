@@ -232,7 +232,13 @@ class AiOPage(tk.Frame):
             ne=" , ".join(strategies)
             ne_msg=f'Nash Equiliberia Pure Strategies :\n{ne}\n'
             if (mixed[0] is None or mixed[1] is None):
-                msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
+                if(mixed[0] is not None and mixed[0] < 1 and mixed[0] > 0):
+                    msg = f'Nash Equiliberia Mixed Strategies : \np={Fraction(mixed[0]).limit_denominator()}\nq∈[0,1]'
+                elif(mixed[1] is not None and mixed[1] < 1 and mixed[1] > 0):
+                    msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq={Fraction(mixed[1]).limit_denominator()}'
+                else:
+                    msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq∈[0,1]'
+
             else:
                 if (mixed[0] < 0 or mixed[0] > 1):
                     msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1]\nq = 0'
