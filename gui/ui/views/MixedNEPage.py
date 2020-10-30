@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.messagebox import showerror
@@ -115,6 +116,40 @@ class MixedNEPage(tk.Frame):
         lpo.configure(foreground=fg_color,relief="flat")
         rpo.configure(foreground=fg_color,relief="flat")
 
+    def PQgraph(self):
+        lineSize = 5
+        plineColor = 'b'
+        qlineColor = 'r'
+        pLineStyle = '--'
+        qLineStyle = '-'
+
+        plt.axis([-0.009, 1.009, -0.009, 1.009])
+        # q graph !
+        plt.axhline(0.5, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
+        p1, p2 = [0, 0], [0, 0.5]
+        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+        plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+        p1, p2 = [1, 0.5], [1, 1]
+        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+        plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+        # p graph !
+        plt.axvline(5 / 7, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+        p1, p2 = [0, 0], [5 / 7, 0]
+        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+        plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+        p1, p2 = [5 / 7, 1], [1, 1]
+        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+        plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+        plt.show()
+
     def solve(self):
         try:
             # We need to transofrm our GUI entries to variables  !
@@ -137,6 +172,9 @@ class MixedNEPage(tk.Frame):
                     msg=f'Nash Equiliberia Mixed Strategies : \np = {result[0]} \nq = {result[1]}'
             # messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
             self.resultLabel.config(text=msg)
+
+
+
 
         except ValueError as verr:
             showerror(title=" Invalid PayOff", message=" All entries need to be Integers!")
