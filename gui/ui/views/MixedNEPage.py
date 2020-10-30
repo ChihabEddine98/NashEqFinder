@@ -116,7 +116,7 @@ class MixedNEPage(tk.Frame):
         lpo.configure(foreground=fg_color,relief="flat")
         rpo.configure(foreground=fg_color,relief="flat")
 
-    def PQgraph(self):
+    def PQgraph(self,p,q):
         lineSize = 5
         plineColor = 'b'
         qlineColor = 'r'
@@ -124,31 +124,63 @@ class MixedNEPage(tk.Frame):
         qLineStyle = '-'
 
         plt.axis([-0.009, 1.009, -0.009, 1.009])
-        # q graph !
-        plt.axhline(0.5, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
-        p1, p2 = [0, 0], [0, 0.5]
-        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-        plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+        if(p and q):
+            # p graph !
+            plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+            p1, p2 = [0, 0], [p, 0]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-        p1, p2 = [1, 0.5], [1, 1]
-        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
 
-        plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+            p1, p2 = [p, 1], [1, 1]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-        # p graph !
-        plt.axvline(5 / 7, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
-        p1, p2 = [0, 0], [5 / 7, 0]
-        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
 
-        plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+            # q graph !
+            plt.axhline(q, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
+            p1, p2 = [0, 0], [0, q]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-        p1, p2 = [5 / 7, 1], [1, 1]
-        x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
 
-        plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+            p1, p2 = [1, q], [1, 1]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
 
-        plt.show()
+            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+        elif(q and not p):
+            # q graph !
+            plt.axhline(q, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
+            p1, p2 = [0, q], [0,1]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+            p1, p2 = [1, q], [1, 0]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+            plt.fill_between([0,1],1,alpha=0.3,hatch='x',edgecolor=plineColor)
+        elif(p and not q):
+            # p graph !
+            plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+            p1, p2 = [0, 0], [p, 0]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+            p1, p2 = [p, 1], [1, 1]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+            plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
+        else:
+            plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=plineColor)
+            plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
+
+
 
     def solve(self):
         try:
@@ -163,6 +195,7 @@ class MixedNEPage(tk.Frame):
             result=s.solve(0, 1)
             if(result[0] is None or result[1] is None):
                 msg = f'Nash Equiliberia Mixed Strategies : \np∈[0,1] \nq∈[0,1]'
+                self.PQgraph(result[0], result[1])
             else:
                 if(result[0]<0 or result[0]>1):
                     msg = f'Nash Equiliberia Mixed Strategies: \np∈[0,1] \nq = 0'
@@ -170,9 +203,11 @@ class MixedNEPage(tk.Frame):
                     msg = f'Nash Equiliberia Mixed Strategies : \np=0 \nq∈[0,1]'
                 else:
                     msg=f'Nash Equiliberia Mixed Strategies : \np = {result[0]} \nq = {result[1]}'
-            # messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
-            self.resultLabel.config(text=msg)
+                    self.PQgraph(result[0],result[1])
 
+            # messagebox.showinfo(title="Mixed Strategies Nash Equilibria", message=msg)
+            self.resultLabel.configure(text=msg)
+            plt.show()
 
 
 
