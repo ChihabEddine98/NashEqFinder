@@ -156,7 +156,6 @@ class MixedNEPage(tk.Frame):
             plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
 
         elif((q or q==0) and (p is None or p<0 or p>1)):
-            print(f' graaaaph NP Q : {p},{q}')
 
             # q graph !
             if(q==0):
@@ -199,7 +198,6 @@ class MixedNEPage(tk.Frame):
                 plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
                 plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
         else:
-            print(f' graaaaph NP NQ : {p},{q}')
 
             plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=plineColor)
             plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)

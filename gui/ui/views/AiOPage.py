@@ -1,4 +1,7 @@
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+
 import tkinter as tk
 from tkinter.messagebox import *
 from algos.Solver import *
@@ -115,6 +118,93 @@ class AiOPage(tk.Frame):
         lpo.configure(foreground=fg_color,relief="flat")
         rpo.configure(foreground=fg_color,relief="flat")
 
+    def PQgraph(self,p,q):
+        lineSize = 5
+        plineColor = 'b'
+        qlineColor = 'r'
+        pLineStyle = '--'
+        qLineStyle = '-'
+
+        plt.axis([-0.009, 1.009, -0.009, 1.009])
+        custom_lines = [Line2D([0], [0], color=plineColor, lw=4),
+                        Line2D([0], [0], color=qlineColor, lw=4)]
+
+
+        if((p is not None and p>0 and p<1) and (q is not None and q>0 and q<1)):
+            # p graph !
+            plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+            p1, p2 = [0, 0], [p, 0]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+            p1, p2 = [p, 1], [1, 1]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+            # q graph !
+            plt.axhline(q, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
+            p1, p2 = [0, 0], [0, q]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+            p1, p2 = [1, q], [1, 1]
+            x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+            plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+        elif((q or q==0) and (p is None or p<0 or p>1)):
+
+            # q graph !
+            if(q==0):
+                p1, p2 = [0, q], [0,1]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+                plt.axhline(q, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+            else:
+                plt.axhline(q, color=qlineColor, linestyle=qLineStyle, linewidth=lineSize)
+                p1, p2 = [0, q], [0,1]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+
+                p1, p2 = [1, q], [1, 0]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=qlineColor, linewidth=lineSize)
+                plt.fill_between([0,1],1,alpha=0.3,hatch='x',edgecolor=plineColor)
+        elif((p or p==0) and (q is None or q<0 or q>1)):
+
+            if(p==0):
+                plt.fill_between([0,1],1,alpha=0.3,hatch='x',edgecolor=qlineColor)
+                plt.axhline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+            else:
+                # p graph !
+                plt.axvline(p, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+                p1, p2 = [0, 0], [p, 0]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+
+                p1, p2 = [p, 1], [1, 1]
+                x_v, y_v = [p1[0], p2[0]], [p1[1], p2[1]]
+
+                plt.plot(x_v, y_v, color=plineColor, linestyle=pLineStyle, linewidth=lineSize)
+                plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
+        else:
+
+            plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=plineColor)
+            plt.fill_between([0, 1], 1, alpha=0.3, hatch='x', edgecolor=qlineColor)
+
+
+        plt.legend(custom_lines,['Player I','Player II'])
+
     def solve(self):
         try:
             # We need to transofrm our GUI entries to variables  !
@@ -175,6 +265,9 @@ class AiOPage(tk.Frame):
             for i in res2Show:
                 self.showNE(show_ne[i][0], show_ne[i][1], show_ne[i][2],
                             show_ne[i][3], show_ne[i][4], show_ne[i][5])
+
+            self.PQgraph(mixed[0],mixed[1])
+            plt.show()
         except ValueError as verr:
             showerror(title=" Invalid PayOff", message=" All entries need to be Integers!")
             return
