@@ -10,7 +10,7 @@ The GUI version can easily been used you have just to introduce your payoff matr
 >**`python main.py`** 
 
 
-## Used Libraries ( Requirements )
+## Libraries ( Requirements )
  
  |                |Install|Utility                         |
 |----------------|-------------------------------|-----------------------------|
