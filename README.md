@@ -28,3 +28,7 @@ The GUI version can easily been used you have just to introduce your payoff matr
 ![6](https://user-images.githubusercontent.com/38104305/97726100-2f5b5800-1acf-11eb-9210-e9628517f670.PNG)
 ![7](https://user-images.githubusercontent.com/38104305/97726102-2f5b5800-1acf-11eb-9b1b-e897742d9ac1.PNG)
 ![8](https://user-images.githubusercontent.com/38104305/97726107-2ff3ee80-1acf-11eb-9f46-86f0fae18738.PNG)
+
+## TODO 
+---
+Optimize code
