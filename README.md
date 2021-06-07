@@ -30,3 +30,4 @@ The GUI version can easily been used you have just to introduce your payoff matr
 ![8](https://user-images.githubusercontent.com/38104305/97726107-2ff3ee80-1acf-11eb-9f46-86f0fae18738.PNG)
 
 
+## TODO
