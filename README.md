@@ -31,3 +31,4 @@ The GUI version can easily been used you have just to introduce your payoff matr
 
 
 ## TODO
+docker ++ 
