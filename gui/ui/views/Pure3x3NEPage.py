@@ -4,7 +4,7 @@ from tkinter.messagebox import showerror
 from algos.solver import *
 
 
-class PureNEPage(tk.Frame):
+class Pure3x3NEPage(tk.Frame):
 
     def resetColors(self):
         bg_col = "#000"
@@ -125,7 +125,7 @@ class PureNEPage(tk.Frame):
 
             M = np.array(payoff)
             s = Solver(payoff=M)
-            result=s.solve(1, 0)
+            result=s.solve(0, 0)
 
             strategies=[]
             for r in result:
@@ -139,7 +139,7 @@ class PureNEPage(tk.Frame):
                     strategies.append("(B,D)")
 
             ne=" , ".join(strategies)
-            ne_msg=f'Pure Nash Equiliberia Strategies :\n{ne}\n'
+            ne_msg=f'Pure NE 3x3 Strategies :\n{ne}\n'
             print(ne_msg)
             self.resultLabel.config(text=ne_msg)
 
@@ -518,6 +518,86 @@ class PureNEPage(tk.Frame):
         self.payoffV11.configure(highlightbackground="#d9d9d9")
         self.payoffV11.configure(highlightcolor="black")
         self.payoffV11.configure(text=''',''')
+        
+        '''
+        ------------------------------------------
+        |                Position : 1,2          |
+        ------------------------------------------
+        '''
+        
+        self.payoffFrame12 = tk.Frame(self.payoffMatrixFrame)
+        self.payoffFrame12.place(relx=0.53, rely=0.436, relheight=0.327
+                , relwidth=0.417)
+        self.payoffFrame12.configure(relief='groove')
+        self.payoffFrame12.configure(borderwidth="2")
+        self.payoffFrame12.configure(relief="groove")
+        self.payoffFrame12.configure(background="#000")
+        self.payoffFrame12.configure(highlightbackground="#d9d9d9")
+        self.payoffFrame12.configure(highlightcolor="black")
+
+        self.payoffEntryL12 = tk.Entry(self.payoffFrame12,justify="center")
+        self.payoffEntryL12.place(relx=0.161, rely=0.25, height=42
+                , relwidth=0.203)
+        self.payoffEntryL12.configure(background=bg_col)
+        self.payoffEntryL12.configure(disabledforeground="#a3a3a3")
+        self.payoffEntryL12.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
+        self.payoffEntryL12.configure(foreground=p1_col)
+        self.payoffEntryL12.configure(highlightbackground="#d9d9d9")
+        self.payoffEntryL12.configure(highlightcolor="black")
+        self.payoffEntryL12.configure(insertbackground=fg_col)
+        self.payoffEntryL12.configure(selectbackground="blue")
+        self.payoffEntryL12.configure(selectforeground="white")
+        self.payoffEntryL12.configure(relief="groove")
+
+        self.payoffEntryR12 = tk.Entry(self.payoffFrame12,justify="center")
+        self.payoffEntryR12.place(relx=0.594, rely=0.25, height=42
+                , relwidth=0.203)
+        self.payoffEntryR12.configure(background=bg_col)
+        self.payoffEntryR12.configure(disabledforeground="#a3a3a3")
+        self.payoffEntryR12.configure(font="-family {Segoe UI Emoji} -size 20 -weight bold")
+        self.payoffEntryR12.configure(foreground=p2_col)
+        self.payoffEntryR12.configure(highlightbackground="#d9d9d9")
+        self.payoffEntryR12.configure(highlightcolor="black")
+        self.payoffEntryR12.configure(insertbackground=fg_col)
+        self.payoffEntryR12.configure(selectbackground="blue")
+        self.payoffEntryR12.configure(selectforeground="white")
+        self.payoffEntryR12.configure(relief="groove")
+
+        self.payoffLP12 = tk.Label(self.payoffFrame12)
+        self.payoffLP12.place(relx=0.051, rely=0.207, height=40, width=16)
+        self.payoffLP12.configure(activebackground="#f9f9f9")
+        self.payoffLP12.configure(activeforeground="black")
+        self.payoffLP12.configure(background="#000")
+        self.payoffLP12.configure(disabledforeground="#a3a3a3")
+        self.payoffLP12.configure(font="-family {Segoe UI Emoji} -size 22 -weight bold")
+        self.payoffLP12.configure(foreground="#fff")
+        self.payoffLP12.configure(highlightbackground="#d9d9d9")
+        self.payoffLP12.configure(highlightcolor="black")
+        self.payoffLP12.configure(text='''(''')
+
+        self.payoffRP12 = tk.Label(self.payoffFrame12)
+        self.payoffRP12.place(relx=0.871, rely=0.207, height=40, width=16)
+        self.payoffRP12.configure(activebackground="#f9f9f9")
+        self.payoffRP12.configure(activeforeground="black")
+        self.payoffRP12.configure(background="#000")
+        self.payoffRP12.configure(disabledforeground="#a3a3a3")
+        self.payoffRP12.configure(font="-family {Segoe UI Emoji} -size 22 -weight bold")
+        self.payoffRP12.configure(foreground="#fff")
+        self.payoffRP12.configure(highlightbackground="#d9d9d9")
+        self.payoffRP12.configure(highlightcolor="black")
+        self.payoffRP12.configure(text=''')''')
+
+        self.payoffV12 = tk.Label(self.payoffFrame12)
+        self.payoffV12.place(relx=0.433, rely=0.103, height=51, width=28)
+        self.payoffV12.configure(activebackground="#f9f9f9")
+        self.payoffV12.configure(activeforeground="black")
+        self.payoffV12.configure(background="#000")
+        self.payoffV12.configure(disabledforeground="#a3a3a3")
+        self.payoffV12.configure(font="-family {Segoe UI Emoji} -size 28 -weight bold")
+        self.payoffV12.configure(foreground="#fff")
+        self.payoffV12.configure(highlightbackground="#d9d9d9")
+        self.payoffV12.configure(highlightcolor="black")
+        self.payoffV12.configure(text=''',''')
 
 
         self.Label1_2 = tk.Label(self.mainFrame)

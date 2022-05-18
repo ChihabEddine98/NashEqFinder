@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from algos.Solver import *
+from algos.solver import *
 from gui.App import *
 
 
@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
 
     # Gui part !
-    app=App()
+    app=App(m3)
     app.mainloop()
 
 

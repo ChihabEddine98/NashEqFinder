@@ -4,7 +4,7 @@ from matplotlib.lines import Line2D
 
 import tkinter as tk
 from tkinter.messagebox import *
-from algos.Solver import *
+from algos.solver import *
 
 
 

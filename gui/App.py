@@ -4,14 +4,17 @@ from gui.ui.views.PureNEPage import *
 from gui.ui.views.MixedNEPage import *
 from gui.ui.views.AiOPage import *
 from gui.ui.views.WelcomePage import *
+from gui.ui.views.Pure3x3NEPage import *
+from algos.solver import *
 
 
 
 class App(tk.Tk):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, mx=None,*args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-
+        self.mx = mx
+        self.solve()
         self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         self.resizable(width=False, height=False)
 
@@ -35,7 +38,7 @@ class App(tk.Tk):
 
 
         self.frames = {}
-        for F in (WelcomePage,PureNEPage,MixedNEPage,AiOPage):
+        for F in (WelcomePage,PureNEPage,MixedNEPage,AiOPage,Pure3x3NEPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -48,3 +51,22 @@ class App(tk.Tk):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
         frame.tkraise()
+    
+    def solve(self):
+        
+        M = np.array(self.mx)
+        s = Solver(payoff=M)
+        result=s.solve(0, 0)
+
+        strategies=[]
+        for r in result:
+            if(r[0]==0 and r[1]==0):
+                strategies.append("(A,C)")
+            elif(r[0]==0 and r[1]==1):
+                strategies.append("(A,D)")
+            elif(r[0]==1 and r[1]==0):
+                strategies.append("(B,C)")
+            else:
+                strategies.append("(B,D)")
+
+        return

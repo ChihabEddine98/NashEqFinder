@@ -5,7 +5,7 @@ from matplotlib.lines import Line2D
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.messagebox import showerror
-from algos.Solver import *
+from algos.solver import *
 
 
 class MixedNEPage(tk.Frame):

@@ -53,7 +53,40 @@ class Solver:
         print(result)
 
         return result
+    
+    def solve_pure_nxn(self,dim=3):
+        pne1 , pne2 = [] , []
+        # Best responses for Player 1 against Player 2 strategies 
+        # Than those for Player 2 against Player 1
+        for i , j in zip(range(dim),range(dim)):
+            x_max , y_max = max(self.M[:, j], key=lambda x: x[0]) , max(self.M[i, :], key=lambda y: y[1])
+            a , b = [tuple(x) for x in self.M[:, j]] , [tuple(x) for x in self.M[i, :]]
+            
+            if(a[0] == a[1]):
+                best_reply1 = [(a[0],(0,j)),(a[1],(1,j))]
+            else:
+                best_reply1 = [(tuple(x), (a.index(tuple(x)), j)) for x in self.M[:, j] if x[0] == x_max[0]]
+                 
+            if(b[0] == b[1]):
+                best_reply2 = [(b[0],(i,0)),(b[1],(i,1))]
+            else:
+                best_reply2 = [(tuple(y), (i, b.index(tuple(y)))) for y in self.M[i, :] if y[1] == y_max[1]]
+                
+            pne1 += best_reply1
+            pne2 += best_reply2
+            
+        print(f'Best Replies (payoff,position) for Player 1 : {pne1}')
+        print(f'Best Replies (payoff,position) for Player 2 : {pne2}')
+        
+        # Intersection of two lists give us the Nash equilibria !
+        res = [x for x in list(set(pne1) & set(pne2))]
+        print(f'NE\'s (payoff,position)  : {res}')
+        
+        result = [x[1] for x in list(set(pne1) & set(pne2))]
+        print(result)
 
+        return result
+        
     """
         We will try to solve to equations of type : ( find p and q )
         a*p=b
@@ -83,6 +116,9 @@ class Solver:
         p = 1/6
         q = 1/3
     """
+    
+    
+
 
     # This algo give us the results in constant time ! cool o(1)
     def solve_mixed(self):
@@ -114,4 +150,4 @@ class Solver:
         elif (not pure and mixed):
             return self.solve_mixed()
         else:
-            return -1
+            return self.solve_pure_nxn()
