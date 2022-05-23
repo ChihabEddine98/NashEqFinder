@@ -33,4 +33,4 @@ The GUI version can easily been used you have just to introduce your payoff matr
 ## TODO
 docker ++ 
 Py 3.10
-nxn games
+nxn games GUI
