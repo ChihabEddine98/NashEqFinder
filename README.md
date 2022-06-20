@@ -34,3 +34,4 @@ The GUI version can easily been used you have just to introduce your payoff matr
 docker ++ 
 Py 3.10
 nxn games GUI
+concrete 2x2 games (chess)
