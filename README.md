@@ -1,7 +1,7 @@
 # NashEqFinder 
 NashEqFInder is a 2x2 (nxn -- cli-only__) Strategic Game solver , it finds Nash Equiliberia in Pure and Mixed strategies implemented in Python 3.8.
 
-The GUI version can easily been used you have just to introduce your payoff matrix ( integers) and that's it ! 
+The GUI version can easily been used you have just to introduce your payoff matrix (integers) and that's it ! 
 
 > **Note:** The **Non integers** filled entries will be automatically rejected with an 
 > error message  
